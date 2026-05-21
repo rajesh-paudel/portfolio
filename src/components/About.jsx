@@ -1,10 +1,13 @@
 import React from "react";
-
+import { FaLinkedin, FaGithub, FaFacebook, FaInstagram } from "react-icons/fa";
+import { FaG } from "react-icons/fa6";
 const About = () => {
   return (
     <section className="about-section">
       <div className="about-left">
-        <div className="about-image"></div>
+        <div className="about-image">
+          <img src="/about.png" width={300} alt="Rajesh Paudel" />
+        </div>
       </div>
       <div className="about-right">
         <h2>About Me</h2>
@@ -18,39 +21,33 @@ const About = () => {
         </p>
         <div className="about-socials">
           <a
-            href="https://www.linkedin.com/in/rajesh-paudel-9a1b4b1b2/"
+            href="https://www.linkedin.com/in/rajesh-paudel/"
             target="_blank"
             rel="noopener noreferrer"
           >
-            LinkedIn
+            <FaLinkedin />
           </a>
           <a
-            href="https://github.com/rajeshpaudel"
+            href="https://github.com/rajesh-paudel"
             target="_blank"
             rel="noopener noreferrer"
           >
-            GitHub
+            <FaGithub />
+          </a>
+
+          <a
+            href="https://www.facebook.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FaFacebook />
           </a>
           <a
-            href="https://twitter.com/rajeshpaudel"
+            href="https://www.instagram.com"
             target="_blank"
             rel="noopener noreferrer"
           >
-            Twitter
-          </a>
-          <a
-            href="https://www.facebook.com/rajesh.paudel.9"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Facebook
-          </a>
-          <a
-            href="https://www.instagram.com/rajeshpaudel/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Instagram
+            <FaInstagram />
           </a>
         </div>
       </div>

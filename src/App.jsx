@@ -1,10 +1,9 @@
-import { useState } from "react";
 import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import Banner from "./components/Banner";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
 import About from "./components/About";
+import Footer from "./components/Footer";
+
 function App() {
   return (
     <BrowserRouter>
@@ -13,6 +12,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }
