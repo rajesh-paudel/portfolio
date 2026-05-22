@@ -14,6 +14,9 @@ const Navbar = () => {
           <li>
             <a href="/#tech-stack">Tech Stack</a>
           </li>
+          <li>
+            <a href="/#education">Education</a>
+          </li>
 
           <li>
             <a href="/#projects">Projects</a>

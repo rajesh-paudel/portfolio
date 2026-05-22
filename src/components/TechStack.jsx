@@ -99,6 +99,9 @@ const TechStack = () => {
         <LuChevronsRightLeft className="tech-stack-icon" size={30} />{" "}
         <h3>Tech Stack</h3>
       </div>
+      <p className="section-subtitle">
+        Tools and technologies I have been learning and building with.
+      </p>
       <div className="tech-stack-container">
         {TechStackData.map((tech) => (
           <div className="tech-card">

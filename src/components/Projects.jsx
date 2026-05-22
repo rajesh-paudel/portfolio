@@ -5,14 +5,24 @@ const projectData = [
   {
     title: "The Halton",
     image: "/thehalton.png",
-    tech: "React, Vite, CSS",
-    summary: "A premium landing page experience for a real estate brand.",
+    tech: ["HTML", "CSS", "JavaScript", "React"],
+    description: [
+      "Built a clean UI for a real estate listing website.",
+      "Worked with a static rendering strategy for faster page delivery.",
+      "Handled filtering, sorting, and pagination for listing data.",
+      "used optimized techniques for large amount of image fetching and rendering from cdn",
+    ],
   },
   {
-    title: "Task Manager",
-    image: "/about.png",
-    tech: "React, LocalStorage",
-    summary: "A productivity app for creating, organizing, and tracking tasks.",
+    title: "WorkMomk",
+    image: "/image.png",
+    tech: ["React", "Next.js", "Python"],
+    description: [
+      "Updated email sending from Resend to Mailgun for a more reliable workflow.",
+      "Improved UI details for a smoother user experience.",
+      "Integrated a component-based email creation tool.",
+      "Built a component-based form generation flow inspired by Typeform.",
+    ],
   },
 ];
 
@@ -23,28 +33,28 @@ const Projects = () => {
         <FaFolderOpen className="projects-section-icon" size={30} />
         <h3>Projects</h3>
       </div>
+      <p className="section-subtitle">
+        A few projects where I practiced building real interfaces and features.
+      </p>
 
       <div className="projects-container">
         {projectData.map((p) => (
-          <div className="projects-card" key={p.title}>
-            <div className="project-flip">
-              <div className="project-face project-front">
-                <div className="project-image-wrap">
-                  <img className="project-image" src={p.image} alt={p.title} />
-                </div>
-                <div className="project-front-info">
-                  <h3 className="project-name">{p.title}</h3>
-                  <p className="project-techstack">{p.tech}</p>
-                </div>
-              </div>
-              <div className="project-face project-back">
-                <div className="project-back-content">
-                  <p className="project-kicker">Description</p>
-                  <p className="projects-desc">{p.summary}</p>
-                </div>
-              </div>
+          <article className="projects-card" key={p.title}>
+            <img className="project-image" src={p.image} alt={p.title} />
+
+            <div className="project-content">
+              <h4 className="project-title">{p.title}</h4>
+              <p className="project-tech">
+                <span>Tech:</span> {p.tech.join(", ")}
+              </p>
+
+              <ul className="project-description-list">
+                {p.description.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
             </div>
-          </div>
+          </article>
         ))}
       </div>
     </div>

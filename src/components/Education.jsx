@@ -25,11 +25,14 @@ const educationData = [
 ];
 const Education = () => {
   return (
-    <div className="education-section">
+    <div className="education-section" id="education">
       <div className="education-section-header">
         <FaGraduationCap className="education-section-icon" size={30} />
         <h3>Education</h3>
       </div>
+      <p className="section-subtitle">
+        My academic background and the path that shaped my learning journey.
+      </p>
       <div className="education-container">
         {educationData.map((edu) => (
           <div className="education-card" key={edu.id}>
