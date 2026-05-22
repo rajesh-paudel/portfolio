@@ -14,7 +14,7 @@ const projectData = [
     ],
   },
   {
-    title: "WorkMomk",
+    title: "WorkMonk",
     image: "/image.png",
     tech: ["React", "Next.js", "Python"],
     description: [
