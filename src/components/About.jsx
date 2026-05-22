@@ -10,7 +10,7 @@ const About = () => {
         </div>
       </div>
       <div className="about-right">
-        <h2>About Me</h2>
+        <h2 style={{ marginBottom: "0px" }}>About Me</h2>
         <p className="about-name">Rajesh Paudel - Frontend Developer</p>
         <p className="about-content">
           I am a passionate web developer with a strong focus on creating
