@@ -1,12 +1,25 @@
 import React from "react";
 import { FaFacebook, FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
-
+import { CiMail } from "react-icons/ci";
 const Contact = () => {
   return (
     <div className="contact">
+      <div className="contact-section-top">
+        <div className="contact-section-header">
+          <CiMail className="contact-section-icon" size={30} />
+          <h3 style={{ margin: "5px" }}>Get In Touch</h3>
+        </div>
+        <p className="contact-header-desc">
+          Let's discuss your next project or just say hello!
+        </p>
+      </div>
       <div className="contact-container">
         <div className="contact-left">
-          <h1>Get in Touch</h1>
+          <h1 className="contact-left-title">Let's connect</h1>
+          <p className="contact-left-description">
+            I'm always open to discussing new opportunities, interesting
+            projects, or just having a chat about technology and development.
+          </p>
           <div className="contact-item">
             <div className="contact-label">Email:</div>
             <div className="contact-info"> rajeshpaudel9863@email.com </div>
@@ -93,7 +106,7 @@ const Contact = () => {
                 placeholder="Write Something..."
                 id="message"
                 name="message"
-                rows="5"
+                rows="8"
                 required
               ></textarea>
             </div>

@@ -11,7 +11,7 @@ const About = () => {
       </div>
       <div className="about-right">
         <h2 style={{ marginBottom: "0px" }}>About Me</h2>
-        <p className="about-name">Rajesh Paudel - Frontend Developer</p>
+        <p className="about-name">Rajesh Paudel - Software Developer</p>
         <p className="about-content">
           I am a passionate web developer with a strong focus on creating
           responsive and user-friendly websites. With experience in both
