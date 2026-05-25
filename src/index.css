@@ -66,15 +66,31 @@ a:visited {
   gap: 2rem;
 }
 
+/* navbar section */
+
 nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px 120px;
+  padding: 4px 15px;
   gap: 1rem;
   flex-wrap: wrap;
   color: var(--text);
   border-bottom: rgb(226, 223, 223) solid 1px;
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  background: var(--bg);
+}
+/* @media (min-width: 768px) {
+  nav {
+    padding: 20px 120px;
+  }
+} */
+@media (min-width: 1024px) {
+  nav {
+    padding: 20px 120px;
+  }
 }
 .nav-links {
   display: flex;
@@ -102,6 +118,99 @@ nav {
   font-weight: bold;
 }
 
+.nav-desktop,
+.nav-actions {
+  display: none;
+}
+
+.menu-toggle {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.25rem;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 0.35rem;
+  background: transparent;
+  cursor: pointer;
+}
+
+.menu-toggle span {
+  width: 18px;
+  height: 2px;
+  margin: 0 auto;
+  background-color: var(--text);
+  border-radius: 999px;
+}
+
+.sidebar-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(17, 19, 21, 0.3);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  z-index: 35;
+}
+
+.sidebar-backdrop.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: min(320px, 82vw);
+  height: 100vh;
+  padding: 1.25rem 1rem 1.5rem;
+  background: var(--bg);
+  border-left: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  transform: translateX(100%);
+  transition: transform 0.22s ease;
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.sidebar.is-open {
+  transform: translateX(0);
+}
+
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.sidebar-links {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.sidebar-links li,
+.sidebar-links a {
+  width: 100%;
+}
+
+.sidebar-links a {
+  display: block;
+  padding: 0.75rem 0.25rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.sidebar-hire-button {
+  width: 100%;
+  margin-top: auto;
+}
+
 .hire-button {
   font-size: 0.875rem;
   background-color: var(--accent);
@@ -116,6 +225,19 @@ nav {
 
   transition-duration: 200ms;
 }
+
+@media (min-width: 768px) {
+  .nav-desktop,
+  .nav-actions {
+    display: block;
+  }
+
+  .menu-toggle,
+  .sidebar,
+  .sidebar-backdrop {
+    display: none;
+  }
+}
 .hero-buttons {
   display: flex;
   gap: 1rem;
@@ -128,7 +250,7 @@ nav {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  padding: 0.5rem 1.2rem;
+  padding: 0.5rem 1rem;
   border-radius: 0.35rem;
   border: none;
   cursor: pointer;
@@ -196,17 +318,21 @@ nav {
 .about-section {
   min-height: 100vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   gap: 3rem;
-  padding: 6rem 15rem;
+  padding: 4rem 2rem;
 }
+
 .about-section h2 {
   text-transform: uppercase;
   text-align: start;
-  font-size: 3rem;
+  font-size: 2rem;
   margin: 0;
 }
-
+.about-right {
+  flex: 1;
+}
 .about-name {
   font-size: 1.25rem;
   text-transform: uppercase;
@@ -217,6 +343,7 @@ nav {
 }
 .about-content {
   text-align: start;
+
   font-size: 1rem;
   margin: 0.2rem 0 1.5rem 0;
   color: var(--text);
@@ -243,11 +370,28 @@ Link {
 }
 
 .about-content {
+  width: 100%;
   text-align: start;
   font-size: 1rem;
   color: var(--text);
   line-height: 1.5;
 }
+@media (min-width: 768px) {
+  .about-section {
+    display: flex;
+    flex-direction: row;
+    padding: 4rem 4rem;
+  }
+}
+@media (min-width: 1024px) {
+  .about-section {
+    padding: 6rem 12rem;
+  }
+  .about-section h2 {
+    font-size: 3rem;
+  }
+}
+
 .contact {
   display: flex;
   flex-direction: column;
@@ -257,7 +401,17 @@ Link {
   width: 100%;
   margin: 0 auto;
   gap: 2rem;
-  padding: 6rem 15rem;
+  padding: 4rem 2rem;
+}
+@media (min-width: 768px) {
+  .contact {
+    padding: 4rem 4rem;
+  }
+}
+@media (min-width: 1024px) {
+  .contact {
+    padding: 6rem 12rem;
+  }
 }
 .contact-section-top {
   display: flex;
@@ -298,7 +452,7 @@ Link {
   flex-wrap: wrap;
   align-items: start;
   border-radius: 1rem;
-  padding: 1.5rem;
+  padding: 0.5rem;
 }
 .contact-left {
   flex: 1 1 320px;
@@ -407,14 +561,15 @@ Link {
 }
 .footer-headers {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  gap: 2rem;
+  gap: 5px;
 }
 
 .footer-slogan {
   text-align: start;
-  width: 50%;
+  width: 75%;
   font-size: 2.4rem;
   line-height: 1.2;
 
@@ -423,6 +578,7 @@ Link {
 }
 .footer-links {
   display: flex;
+  flex-direction: column;
   color: rgb(42, 42, 42);
   justify-content: space-between;
   gap: 2rem;
@@ -442,18 +598,28 @@ Link {
   text-align: start;
   margin: 0.25rem 0;
 }
+
 .footer-link a:hover {
   color: var(--accent);
   transition-duration: 100ms;
 }
 .footer-bottom {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
   font-size: 14px;
   font-weight: 500;
   color: rgb(86, 86, 86);
   border-top: 1px solid var(--border);
+}
+@media (min-width: 768px) {
+  .footer-headers,
+  .footer-links,
+  .footer-bottom {
+    display: flex;
+    flex-direction: row;
+  }
 }
 .footer-contact {
   display: flex;
@@ -503,7 +669,18 @@ Link {
 
 /* tech stack section */
 #tech-stack {
-  padding: 6rem 15rem;
+  padding: 2rem 2rem;
+}
+@media (min-width: 768px) {
+  #tech-stack {
+    padding: 4rem 6rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  #tech-stack {
+    padding: 6rem 12rem;
+  }
 }
 #tech-stack h3 {
   font-size: 1.75rem;
@@ -592,7 +769,7 @@ Link {
 }
 .education-container {
   display: grid;
-  grid-template-columns: repeat(3, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 1.5rem;
   width: 100%;
 }
