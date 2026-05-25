@@ -1,12 +1,13 @@
 import React from "react";
 import { FaLinkedin, FaGithub, FaFacebook, FaInstagram } from "react-icons/fa";
 import { FaG } from "react-icons/fa6";
+import about from "../assets/about.png";
 const About = () => {
   return (
     <section className="about-section">
       <div className="about-left">
         <div className="about-image">
-          <img src="/about.png" width={300} alt="Rajesh Paudel" />
+          <img src={about} width={300} alt="Rajesh Paudel" />
         </div>
       </div>
       <div className="about-right">

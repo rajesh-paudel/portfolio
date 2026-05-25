@@ -1,10 +1,11 @@
 import React from "react";
 import { FaFolderOpen } from "react-icons/fa";
-
+import thehalton from "../assets/thehalton.png";
+import workmonk from "../assets/workmonk.png";
 const projectData = [
   {
     title: "The Halton",
-    image: "/thehalton.png",
+    image: thehalton,
     tech: ["HTML", "CSS", "JavaScript", "React"],
     description: [
       "Built a clean UI for a real estate listing website.",
@@ -15,7 +16,7 @@ const projectData = [
   },
   {
     title: "WorkMonk",
-    image: "/image.png",
+    image: workmonk,
     tech: ["React", "Next.js", "Python"],
     description: [
       "Updated email sending from Resend to Mailgun for a more reliable workflow.",
