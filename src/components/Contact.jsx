@@ -1,7 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaFacebook, FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
 import { CiMail } from "react-icons/ci";
 const Contact = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+
+    setFormData((currentData) => ({
+      ...currentData,
+      [name]: value,
+    }));
+
+    if (isSubmitted) {
+      setIsSubmitted(false);
+    }
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    setIsSubmitted(true);
+    setFormData({
+      name: "",
+      email: "",
+      message: "",
+    });
+  };
+
   return (
     <div className="contact">
       <div className="contact-section-top">
@@ -71,7 +101,7 @@ const Contact = () => {
           </div>
         </div>
         <div className="contact-right">
-          <form className="contact-form">
+          <form className="contact-form" onSubmit={handleSubmit}>
             <div className="contact-inputs">
               <div className="form-item">
                 <label htmlFor="name" className="form-item-label">
@@ -82,6 +112,8 @@ const Contact = () => {
                   type="text"
                   id="name"
                   name="name"
+                  value={formData.name}
+                  onChange={handleChange}
                   required
                 />
               </div>
@@ -94,6 +126,8 @@ const Contact = () => {
                   type="email"
                   id="email"
                   name="email"
+                  value={formData.email}
+                  onChange={handleChange}
                   required
                 />
               </div>
@@ -107,9 +141,14 @@ const Contact = () => {
                 id="message"
                 name="message"
                 rows="8"
+                value={formData.message}
+                onChange={handleChange}
                 required
               ></textarea>
             </div>
+            {isSubmitted && (
+              <p className="contact-form-message">Thanks for reaching out.</p>
+            )}
             <button type="submit" className="contact-submit">
               Send Message
             </button>

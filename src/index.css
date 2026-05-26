@@ -563,18 +563,19 @@ Link {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center;
-  gap: 5px;
+  align-items: flex-start;
+  gap: 1.5rem;
 }
 
 .footer-slogan {
   text-align: start;
-  width: 75%;
-  font-size: 2.4rem;
+  width: 100%;
+  max-width: 16ch;
+  font-size: clamp(1.8rem, 6vw, 2.8rem);
   line-height: 1.2;
-
   font-family: "Times New Roman", Times, serif;
   font-weight: bold;
+  text-wrap: balance;
 }
 .footer-links {
   display: flex;
@@ -608,10 +609,12 @@ Link {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  gap: 0.75rem;
   font-size: 14px;
   font-weight: 500;
   color: rgb(86, 86, 86);
   border-top: 1px solid var(--border);
+  padding-top: 1rem;
 }
 @media (min-width: 768px) {
   .footer-headers,
@@ -626,27 +629,30 @@ Link {
   flex-direction: column;
   align-items: start;
   gap: 0.75rem;
-  padding: 1rem;
-
+  padding: 1rem 0;
   border-radius: 0.5rem;
+  width: 100%;
+  max-width: 400px;
 }
 .footer-contact-header {
   font-size: 1.3rem;
   margin: 0;
   font-weight: bold;
   line-height: 1;
-  white-space: nowrap;
 }
 
 .footer-subscribe {
   display: flex;
+  flex-wrap: wrap;
+  width: 100%;
   max-width: 400px;
+  gap: 0.75rem;
 }
 .footer-email-input {
-  flex: 1;
+  flex: 1 1 220px;
   min-width: 0;
   padding: 0.8rem 1rem;
-  border-radius: 0.5rem 0rem 0rem 0.5rem;
+  border-radius: 0.5rem;
   border: none;
   outline: none;
   font-size: 0.9rem;
@@ -659,12 +665,39 @@ Link {
   font-size: 0.9rem;
   border: none;
   padding: 0.5rem 1rem;
-  border-radius: 0rem 0.5rem 0.5rem 0rem;
+  border-radius: 0.5rem;
   cursor: pointer;
+  white-space: nowrap;
 }
 .footer-subscribe-button:hover {
   opacity: 0.9;
   transition-duration: 100ms;
+}
+
+.contact-form-message {
+  margin: -0.5rem 0 0;
+  color: var(--accent);
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+@media (min-width: 768px) {
+  .footer-contact {
+    padding: 1rem;
+  }
+
+  .footer-subscribe {
+    flex-wrap: nowrap;
+    gap: 0;
+  }
+
+  .footer-email-input {
+    border-radius: 0.5rem 0 0 0.5rem;
+  }
+
+  .footer-subscribe-button {
+    border-radius: 0 0.5rem 0.5rem 0;
+  }
 }
 
 /* tech stack section */
