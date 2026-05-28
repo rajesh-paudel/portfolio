@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { FaLinkedin, FaGithub, FaFacebook, FaInstagram } from "react-icons/fa";
 const Footer = () => {
@@ -34,7 +33,7 @@ const Footer = () => {
               <Link to="/about">About Us</Link>
             </p>
             <p className="footer-link">
-              <Link to="/contact">Contact</Link>
+              <Link to="/#contact">Contact</Link>
             </p>
             <p className="footer-link">
               <Link to="/pricing">Pricing</Link>

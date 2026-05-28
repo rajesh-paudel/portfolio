@@ -1,6 +1,20 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { Mail, MapPin, Phone, Send } from "lucide-react";
 import { FaFacebook, FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
-import { CiMail } from "react-icons/ci";
+
+const contactLinks = [
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/rajesh-paudel/",
+    icon: FaLinkedin,
+  },
+  {
+    label: "GitHub",
+    href: "https://github.com/rajesh-paudel",
+    icon: FaGithub,
+  },
+];
+
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -33,129 +47,161 @@ const Contact = () => {
   };
 
   return (
-    <div className="contact">
-      <div className="contact-section-top">
-        <div className="contact-section-header">
-          <CiMail className="contact-section-icon" size={30} />
-          <h3 style={{ margin: "5px" }}>Get In Touch</h3>
+    <section
+      className="mx-auto max-w-5xl px-5 py-16 text-left sm:px-8 lg:py-20"
+      id="contact"
+    >
+      <div className="mx-auto max-w-3xl text-center">
+        <div className="flex items-center justify-center gap-3">
+          <span className="grid h-10 w-10 place-items-center rounded-full border-2 border-[#20222b] text-[#20222b]">
+            <Mail size={21} />
+          </span>
+          <h3 className="text-3xl font-bold text-[#111315]">Get In Touch</h3>
         </div>
-        <p className="contact-header-desc">
-          Let's discuss your next project or just say hello!
+        <p className="mx-auto mt-3 max-w-2xl text-base leading-7 text-zinc-600">
+          Let&apos;s discuss your next project or just say hello.
         </p>
       </div>
-      <div className="contact-container">
-        <div className="contact-left">
-          <h1 className="contact-left-title">Let's connect</h1>
-          <p className="contact-left-description">
-            I'm always open to discussing new opportunities, interesting
-            projects, or just having a chat about technology and development.
-          </p>
-          <div className="contact-item">
-            <div className="contact-label">Email:</div>
-            <div className="contact-info"> rajeshpaudel9863@email.com </div>
-          </div>
-          <div className="contact-item">
-            <div className="contact-label">Phone:</div>
-            <div className="contact-info">456-7890 </div>
-          </div>
-          <div className="contact-item">
-            <div className="contact-label">Address:</div>
-            <div className="contact-info">Tokha-8, Kathmandu</div>
-          </div>
-          <div className="contact-item">
-            <div className="contact-label">Follow Us</div>
-            <div
-              className="about-socials"
-              style={{ gap: "20px", marginTop: "5px" }}
-            >
-              <a
-                href="https://www.linkedin.com/in/rajesh-paudel/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FaLinkedin />
-              </a>
-              <a
-                href="https://github.com/rajesh-paudel"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FaGithub />
-              </a>
 
-              <a
-                href="https://www.facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FaFacebook />
-              </a>
-              <a
-                href="https://www.instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <FaInstagram />
-              </a>
+      <div className="mt-10 grid gap-6 lg:grid-cols-[0.85fr_1.15fr]">
+        <div className="rounded-lg border border-[#dfe2e8] bg-white p-6">
+          <h4 className="text-2xl font-bold text-[#111315]">
+            Let&apos;s connect
+          </h4>
+          <p className="mt-3 text-base leading-7 text-zinc-600">
+            I&apos;m always open to discussing new opportunities, interesting
+            projects, or a quick chat about technology and development.
+          </p>
+
+          <div className="mt-8 space-y-5">
+            <div className="flex gap-3">
+              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-md bg-[#0d530e]/10 text-[#0d530e]">
+                <Mail size={18} />
+              </span>
+              <div>
+                <p className="text-sm font-semibold text-zinc-500">Email</p>
+                <p className="font-semibold text-[#111315]">
+                  rajeshpaudel9863@email.com
+                </p>
+              </div>
+            </div>
+            <div className="flex gap-3">
+              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-md bg-[#0d530e]/10 text-[#0d530e]">
+                <Phone size={18} />
+              </span>
+              <div>
+                <p className="text-sm font-semibold text-zinc-500">Phone</p>
+                <p className="font-semibold text-[#111315]">456-7890</p>
+              </div>
+            </div>
+            <div className="flex gap-3">
+              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-md bg-[#0d530e]/10 text-[#0d530e]">
+                <MapPin size={18} />
+              </span>
+              <div>
+                <p className="text-sm font-semibold text-zinc-500">Address</p>
+                <p className="font-semibold text-[#111315]">
+                  Tokha-8, Kathmandu
+                </p>
+              </div>
             </div>
           </div>
+
+          <div className="mt-8 flex flex-wrap gap-3">
+            {contactLinks.map((link) => {
+              const Icon = link.icon;
+
+              return (
+                <a
+                  aria-label={link.label}
+                  className="grid h-11 w-11 place-items-center rounded-md border border-[#dfe2e8] text-zinc-600 transition hover:border-[#0d530e] hover:text-[#0d530e]"
+                  href={link.href}
+                  key={link.label}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  <Icon size={19} />
+                </a>
+              );
+            })}
+            <a
+              aria-label="Facebook"
+              className="grid h-11 w-11 place-items-center rounded-md border border-[#dfe2e8] text-zinc-600 transition hover:border-[#0d530e] hover:text-[#0d530e]"
+              href="https://www.facebook.com"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <FaFacebook />
+            </a>
+            <a
+              aria-label="Instagram"
+              className="grid h-11 w-11 place-items-center rounded-md border border-[#dfe2e8] text-zinc-600 transition hover:border-[#0d530e] hover:text-[#0d530e]"
+              href="https://www.instagram.com"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <FaInstagram />
+            </a>
+          </div>
         </div>
-        <div className="contact-right">
-          <form className="contact-form" onSubmit={handleSubmit}>
-            <div className="contact-inputs">
-              <div className="form-item">
-                <label htmlFor="name" className="form-item-label">
-                  Your Name
-                </label>
-                <input
-                  placeholder="Your full name"
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-              <div className="form-item">
-                <label htmlFor="email" className="form-item-label">
-                  Email address
-                </label>
-                <input
-                  placeholder="Your email address"
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-            </div>
-            <div className="form-item">
-              <label htmlFor="message" className="form-item-label">
-                Message
-              </label>
-              <textarea
-                placeholder="Write Something..."
-                id="message"
-                name="message"
-                rows="8"
-                value={formData.message}
-                onChange={handleChange}
-                required
-              ></textarea>
-            </div>
-            {isSubmitted && (
-              <p className="contact-form-message">Thanks for reaching out.</p>
-            )}
-            <button type="submit" className="contact-submit">
-              Send Message
-            </button>
-          </form>
-        </div>
+
+        <form
+          className="rounded-lg border border-[#dfe2e8] bg-[#f7f8f4] p-6"
+          onSubmit={handleSubmit}
+        >
+          <div className="text-sm mb-4 font-semibold text-zinc-600">
+            Your Name
+            <input
+              className="mt-2 w-full rounded-md border border-[#dfe2e8] bg-white px-4 py-3 text-sm outline-none transition focus:border-[#0d530e]"
+              name="name"
+              onChange={handleChange}
+              placeholder="Your full name"
+              required
+              type="text"
+              value={formData.name}
+            />
+          </div>
+          <div className="text-sm font-semibold  text-zinc-600">
+            Email address
+            <input
+              className="mt-2 w-full  rounded-md border border-[#dfe2e8] bg-white px-4 py-3 text-sm outline-none transition focus:border-[#0d530e]"
+              name="email"
+              onChange={handleChange}
+              placeholder="Your email address"
+              required
+              type="email"
+              value={formData.email}
+            />
+          </div>
+
+          <label className="mt-4 block text-sm font-semibold text-zinc-600">
+            Message
+            <textarea
+              className="mt-2 min-h-44 w-full resize-y rounded-md border border-[#dfe2e8] bg-white px-4 py-3 text-sm outline-none transition focus:border-[#0d530e]"
+              name="message"
+              onChange={handleChange}
+              placeholder="Write something..."
+              required
+              value={formData.message}
+            />
+          </label>
+
+          {isSubmitted && (
+            <p className="mt-4 text-sm font-semibold text-[#0d530e]">
+              Thanks for reaching out.
+            </p>
+          )}
+
+          <button
+            className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-md bg-[#0d530e] px-4 py-3 text-sm font-semibold text-white transition hover:bg-[#0a430b]"
+            type="submit"
+          >
+            <Send size={16} />
+            Send Message
+          </button>
+        </form>
       </div>
-    </div>
+    </section>
   );
 };
 

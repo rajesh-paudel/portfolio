@@ -1,5 +1,6 @@
-import React from "react";
-import { FaGraduationCap } from "react-icons/fa";
+import { GraduationCap } from "lucide-react";
+import EducationCard from "./EducationCard";
+
 const educationData = [
   {
     id: "01",
@@ -12,7 +13,7 @@ const educationData = [
     id: "02",
     duration: "2020-2022",
     college: "SouthWestern State College",
-    degree: "Higher Secondary Education ",
+    degree: "Higher Secondary Education",
     location: "Basundhara, Nepal",
   },
   {
@@ -23,31 +24,31 @@ const educationData = [
     location: "Lainchaur, Nepal",
   },
 ];
+
 const Education = () => {
   return (
-    <div className="education-section" id="education">
-      <div className="education-section-header">
-        <FaGraduationCap className="education-section-icon" size={30} />
-        <h3>Education</h3>
+    <section
+      className="mx-auto max-w-5xl px-5 py-14 text-left sm:px-8 lg:py-16"
+      id="education"
+    >
+      <div className="mx-auto max-w-3xl text-center">
+        <div className="flex items-center justify-center gap-3">
+          <span className="grid h-10 w-10 place-items-center rounded-full border-2 border-[#20222b] text-[#20222b]">
+            <GraduationCap size={21} />
+          </span>
+          <h3 className="text-3xl font-bold text-[#111315]">Education</h3>
+        </div>
+        <p className="mx-auto mt-3 max-w-2xl text-base leading-7 text-zinc-600">
+          My academic background and the path that shaped my learning journey.
+        </p>
       </div>
-      <p className="section-subtitle">
-        My academic background and the path that shaped my learning journey.
-      </p>
-      <div className="education-container">
-        {educationData.map((edu) => (
-          <div className="education-card" key={edu.id}>
-            <p className="education-id">
-              <span>{edu.id}</span>
-            </p>
 
-            <p className="education-duration"> {edu.duration}</p>
-            <h4 className="education-college">{edu.college}</h4>
-            <p className="education-degree">{edu.degree}</p>
-            <p className="education-location">{edu.location}</p>
-          </div>
+      <div className="mt-8 grid gap-4 md:grid-cols-3">
+        {educationData.map((education) => (
+          <EducationCard education={education} key={education.id} />
         ))}
       </div>
-    </div>
+    </section>
   );
 };
 

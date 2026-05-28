@@ -1,6 +1,6 @@
-import React from "react";
-
 import { ArrowRight, FileUser } from "lucide-react";
+import { Link } from "react-router-dom";
+
 const Hero = () => {
   const name = {
     color: "var(--accent)",
@@ -45,14 +45,14 @@ const Hero = () => {
         applications
       </p>
       <div style={buttons}>
-        <button className="hero-button">
+        <Link className="hero-button" to="/#projects">
           View My Work <ArrowRight size={18} />
-        </button>
+        </Link>
 
-        <button className="cv-button">
+        <a className="cv-button" href="/rajesh-paudel-cv.pdf" download>
           <FileUser size={16} />
           <span>Download CV</span>
-        </button>
+        </a>
       </div>
     </section>
   );

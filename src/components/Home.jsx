@@ -1,16 +1,19 @@
-import React from "react";
 import Hero from "./Hero";
 import TechStack from "./TechStack";
 import Education from "./Education";
 import Projects from "./Projects";
+import Contact from "./Contact";
+
 const Home = () => {
   return (
-    <div>
+    <main className="bg-white">
       <Hero />
       <TechStack />
       <Education />
       <Projects />
-    </div>
+
+      <Contact />
+    </main>
   );
 };
 export default Home;
