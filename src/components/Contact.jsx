@@ -101,7 +101,7 @@ const Contact = () => {
               </span>
               <div>
                 <p className="text-sm font-semibold text-zinc-500">Phone</p>
-                <p className="font-semibold text-[#111315]">xxxxxxxxxxxs</p>
+                <p className="font-semibold text-[#111315]">xxxxxxxxxx</p>
               </div>
             </div>
             <div className="flex gap-3">

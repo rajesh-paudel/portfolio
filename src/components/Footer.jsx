@@ -4,9 +4,11 @@ const Footer = () => {
   return (
     <footer className="footer">
       <div className="footer-top">
-        <div className="footer-headers">
+        <div className="footer-headers mb-5 ">
           <div className="footer-slogan">
-            <p>Building ideas into reality through code</p>
+            <p className="leading-12">
+              Building ideas into reality through code
+            </p>
           </div>
           <div className="footer-contact">
             <p className="footer-contact-header">Get In Touch!</p>
@@ -24,7 +26,7 @@ const Footer = () => {
           <div className="footer-contact-info">
             <h3 className="footer-links-header">Contact Us</h3>
             <p className="footer-link">Email:rajeshpaudel9863@gmail.com</p>
-            <p className="footer-link">Phone: +977 9863-123456</p>
+
             <p className="footer-link">Address: Kathmandu, Nepal</p>
           </div>
           <div className="footer-company">
