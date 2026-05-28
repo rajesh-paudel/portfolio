@@ -15,7 +15,6 @@ const contactLinks = [
     icon: FaGithub,
   },
 ];
-
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: "",

@@ -1,14 +1,14 @@
 import Navbar from "./components/Navbar";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-import Home from "./components/Home";
-import About from "./components/About";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Blog from "./pages/Blog";
+import BlogDetail from "./pages/BlogDetail";
+import BlogAdmin from "./pages/BlogAdmin";
 import Footer from "./components/Footer";
-import Contact from "./components/Contact";
 import { useLayoutEffect } from "react";
-import Blog from "./components/Blog";
-import BlogDetail from "./components/BlogDetail";
-import BlogAdmin from "./components/BlogAdmin";
 import { Toaster } from "react-hot-toast";
+
 const ScrollToTop = ({ children }) => {
   const location = useLocation();
 
@@ -40,7 +40,6 @@ function App() {
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogDetail />} />
           <Route path="/admin/blog" element={<BlogAdmin />} />
-          <Route path="/contact" element={<Contact />} />
         </Routes>
         <Footer />
         <Toaster position="top-center" />
