@@ -8,7 +8,7 @@ import { useLayoutEffect } from "react";
 import Blog from "./components/Blog";
 import BlogDetail from "./components/BlogDetail";
 import BlogAdmin from "./components/BlogAdmin";
-
+import { Toaster } from "react-hot-toast";
 const ScrollToTop = ({ children }) => {
   const location = useLocation();
 
@@ -43,6 +43,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
         </Routes>
         <Footer />
+        <Toaster position="top-center" />
       </ScrollToTop>
     </BrowserRouter>
   );

@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Mail, MapPin, Phone, Send } from "lucide-react";
 import { FaFacebook, FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
-
+import { sendContactEmail } from "../services/email";
+import toast from "react-hot-toast";
 const contactLinks = [
   {
     label: "LinkedIn",
@@ -21,7 +22,8 @@ const Contact = () => {
     email: "",
     message: "",
   });
-  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const [isSending, setIsSending] = useState(false);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -30,20 +32,28 @@ const Contact = () => {
       ...currentData,
       [name]: value,
     }));
-
-    if (isSubmitted) {
-      setIsSubmitted(false);
-    }
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    setIsSubmitted(true);
-    setFormData({
-      name: "",
-      email: "",
-      message: "",
-    });
+    setIsSending(true);
+
+    try {
+      await sendContactEmail(formData);
+
+      toast.success("Message sent successfully!");
+
+      setFormData({
+        name: "",
+        email: "",
+        message: "",
+      });
+    } catch (error) {
+      console.error("EmailJS send error:", error);
+      toast.error("Failed to send message. Try again.");
+    } finally {
+      setIsSending(false);
+    }
   };
 
   return (
@@ -91,7 +101,7 @@ const Contact = () => {
               </span>
               <div>
                 <p className="text-sm font-semibold text-zinc-500">Phone</p>
-                <p className="font-semibold text-[#111315]">456-7890</p>
+                <p className="font-semibold text-[#111315]">xxxxxxxxxxxs</p>
               </div>
             </div>
             <div className="flex gap-3">
@@ -186,18 +196,13 @@ const Contact = () => {
             />
           </label>
 
-          {isSubmitted && (
-            <p className="mt-4 text-sm font-semibold text-[#0d530e]">
-              Thanks for reaching out.
-            </p>
-          )}
-
           <button
-            className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-md bg-[#0d530e] px-4 py-3 text-sm font-semibold text-white transition hover:bg-[#0a430b]"
+            className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-md bg-[#0d530e] px-4 py-3 text-sm font-semibold text-white transition hover:bg-[#0a430b] disabled:cursor-not-allowed disabled:opacity-70"
             type="submit"
+            disabled={isSending}
           >
             <Send size={16} />
-            Send Message
+            {isSending ? "Sending..." : "Send Message"}
           </button>
         </form>
       </div>
