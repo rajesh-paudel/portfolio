@@ -2,7 +2,9 @@ import React from "react";
 import { FaLinkedin, FaGithub, FaFacebook, FaInstagram } from "react-icons/fa";
 import { FaG } from "react-icons/fa6";
 import about from "../assets/about.png";
+import ContactInfo from "../data/contactinfo";
 const About = () => {
+  const { linkedin, facebook, instagram, github } = ContactInfo;
   return (
     <section className="about-section">
       <div className="about-left">
@@ -21,33 +23,17 @@ const About = () => {
           with the latest technologies in the web development world.
         </p>
         <div className="about-socials">
-          <a
-            href="https://www.linkedin.com/in/rajesh-paudel/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a href={linkedin} target="_blank" rel="noopener noreferrer">
             <FaLinkedin />
           </a>
-          <a
-            href="https://github.com/rajesh-paudel"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a href={github} target="_blank" rel="noopener noreferrer">
             <FaGithub />
           </a>
 
-          <a
-            href="https://www.facebook.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a href={facebook} target="_blank" rel="noopener noreferrer">
             <FaFacebook />
           </a>
-          <a
-            href="https://www.instagram.com"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a href={instagram} target="_blank" rel="noopener noreferrer">
             <FaInstagram />
           </a>
         </div>

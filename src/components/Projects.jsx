@@ -1,32 +1,6 @@
 import { FolderOpen } from "lucide-react";
-import thehalton from "../assets/thehalton.png";
-import workmonk from "../assets/workmonk.png";
 import ProjectCard from "./ProjectCard";
-
-const projectData = [
-  {
-    title: "The Halton",
-    image: thehalton,
-    tech: ["HTML", "CSS", "JavaScript", "React"],
-    description: [
-      "Built a clean UI for a real estate listing website.",
-      "Worked with a static rendering strategy for faster page delivery.",
-      "Handled filtering, sorting, and pagination for listing data.",
-      "Used optimized techniques for large image fetching and CDN rendering.",
-    ],
-  },
-  {
-    title: "WorkMonk",
-    image: workmonk,
-    tech: ["React", "Next.js", "Python"],
-    description: [
-      "Updated email sending from Resend to Mailgun for a more reliable workflow.",
-      "Improved UI details for a smoother user experience.",
-      "Integrated a component-based email creation tool.",
-      "Built a component-based form generation flow inspired by Typeform.",
-    ],
-  },
-];
+import projectData from "../data/projectData";
 
 const Projects = () => {
   return (
@@ -49,8 +23,8 @@ const Projects = () => {
         </div>
 
         <div className="mt-8 grid gap-5 lg:grid-cols-2">
-          {projectData.map((project) => (
-            <ProjectCard key={project.title} project={project} />
+          {projectData?.map((project) => (
+            <ProjectCard key={project?.title} project={project} />
           ))}
         </div>
       </div>

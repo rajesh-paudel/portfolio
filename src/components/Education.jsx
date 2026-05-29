@@ -1,29 +1,6 @@
 import { GraduationCap } from "lucide-react";
 import EducationCard from "./EducationCard";
-
-const educationData = [
-  {
-    id: "01",
-    duration: "2012-2020",
-    college: "Paramount Academy",
-    degree: "Primary & Secondary Education",
-    location: "Tokha, Nepal",
-  },
-  {
-    id: "02",
-    duration: "2020-2022",
-    college: "SouthWestern State College",
-    degree: "Higher Secondary Education",
-    location: "Basundhara, Nepal",
-  },
-  {
-    id: "03",
-    duration: "2022-2026",
-    college: "Amrit Science Campus",
-    degree: "BSc. CSIT",
-    location: "Lainchaur, Nepal",
-  },
-];
+import educationData from "../data/educationData";
 
 const Education = () => {
   return (
@@ -44,7 +21,7 @@ const Education = () => {
       </div>
 
       <div className="mt-8 grid gap-4 md:grid-cols-3">
-        {educationData.map((education) => (
+        {educationData?.map((education) => (
           <EducationCard education={education} key={education.id} />
         ))}
       </div>

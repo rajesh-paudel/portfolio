@@ -1,6 +1,18 @@
 import { Link } from "react-router-dom";
-import { FaLinkedin, FaGithub, FaFacebook, FaInstagram } from "react-icons/fa";
+import {
+  FaLinkedin,
+  FaGithub,
+  FaFacebook,
+  FaInstagram,
+  FaEnvelope,
+  FaPhoneAlt,
+  FaMapMarkerAlt,
+} from "react-icons/fa";
+import ContactInfo from "../data/contactinfo";
+
 const Footer = () => {
+  const { email, phone, address, instagram, facebook, linkedin, github } =
+    ContactInfo;
   return (
     <footer className="footer">
       <div className="footer-top">
@@ -25,29 +37,46 @@ const Footer = () => {
         <div className="footer-links">
           <div className="footer-contact-info">
             <h3 className="footer-links-header">Contact Us</h3>
-            <p className="footer-link">Email:rajeshpaudel9863@gmail.com</p>
-
-            <p className="footer-link">Address: Kathmandu, Nepal</p>
+            <a
+              className="footer-link flex items-center gap-2 "
+              href={`mailto:${email}`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <FaEnvelope />
+              <span>{email}</span>
+            </a>
+            <a
+              className="footer-link flex items-center gap-2"
+              href={`tel:${phone}`}
+            >
+              <FaPhoneAlt />
+              <span>{phone}</span>
+            </a>
+            <p className="footer-link flex items-center gap-2">
+              <FaMapMarkerAlt />
+              <span>{address}</span>
+            </p>
           </div>
           <div className="footer-company">
             <h3 className="footer-links-header">Company</h3>
             <p className="footer-link">
-              <Link to="/about">About Us</Link>
+              <Link to="/about">About</Link>
             </p>
             <p className="footer-link">
               <Link to="/#contact">Contact</Link>
             </p>
             <p className="footer-link">
-              <Link to="/pricing">Pricing</Link>
+              <Link to="/blog">Blog</Link>
             </p>
           </div>
           <div className="footer-help">
             <h3 className="footer-links-header">Help</h3>
             <p className="footer-link">
-              <Link to="/help">FAQ</Link>
+              <Link to="/faq">FAQ</Link>
             </p>
             <p className="footer-link">
-              <Link to="/help">Support</Link>
+              <Link to="/#projects">Projects</Link>
             </p>
           </div>
           <div className="footer-follow">
@@ -56,33 +85,16 @@ const Footer = () => {
               className="about-socials"
               style={{ display: "flex", gap: "15px" }}
             >
-              <a
-                href="https://www.linkedin.com/in/rajesh-paudel/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a href={linkedin} target="_blank" rel="noopener noreferrer">
                 <FaLinkedin />
               </a>
-              <a
-                href="https://github.com/rajesh-paudel"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a href={github} target="_blank" rel="noopener noreferrer">
                 <FaGithub />
               </a>
-
-              <a
-                href="https://www.facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a href={facebook} target="_blank" rel="noopener noreferrer">
                 <FaFacebook />
               </a>
-              <a
-                href="https://www.instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a href={instagram} target="_blank" rel="noopener noreferrer">
                 <FaInstagram />
               </a>
             </div>

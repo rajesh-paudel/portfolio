@@ -8,6 +8,9 @@ import BlogAdmin from "./pages/BlogAdmin";
 import Footer from "./components/Footer";
 import { useLayoutEffect } from "react";
 import { Toaster } from "react-hot-toast";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfService from "./pages/TermsOfService";
+import FAQPage from "./pages/FAQ";
 
 const ScrollToTop = ({ children }) => {
   const location = useLocation();
@@ -40,6 +43,9 @@ function App() {
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogDetail />} />
           <Route path="/admin/blog" element={<BlogAdmin />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-of-service" element={<TermsOfService />} />
+          <Route path="/faq" element={<FAQPage />} />
         </Routes>
         <Footer />
         <Toaster position="top-center" />

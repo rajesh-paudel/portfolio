@@ -3,19 +3,10 @@ import { Mail, MapPin, Phone, Send } from "lucide-react";
 import { FaFacebook, FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
 import { sendContactEmail } from "../services/email";
 import toast from "react-hot-toast";
-const contactLinks = [
-  {
-    label: "LinkedIn",
-    href: "https://www.linkedin.com/in/rajesh-paudel/",
-    icon: FaLinkedin,
-  },
-  {
-    label: "GitHub",
-    href: "https://github.com/rajesh-paudel",
-    icon: FaGithub,
-  },
-];
+import ContactInfo from "../data/contactinfo";
+
 const Contact = () => {
+  const { phone, instagram, facebook, linkedin, github, address } = ContactInfo;
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -89,9 +80,14 @@ const Contact = () => {
               </span>
               <div>
                 <p className="text-sm font-semibold text-zinc-500">Email</p>
-                <p className="font-semibold text-[#111315]">
-                  rajeshpaudel9863@email.com
-                </p>
+                <a
+                  href={`mailto:${ContactInfo.email}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="font-semibold hover:underline text-[#111315]"
+                >
+                  {ContactInfo.email}
+                </a>
               </div>
             </div>
             <div className="flex gap-3">
@@ -100,7 +96,12 @@ const Contact = () => {
               </span>
               <div>
                 <p className="text-sm font-semibold text-zinc-500">Phone</p>
-                <p className="font-semibold text-[#111315]">xxxxxxxxxx</p>
+                <a
+                  href={`tel:${phone}`}
+                  className="font-semibold text-[#111315]"
+                >
+                  {phone}
+                </a>
               </div>
             </div>
             <div className="flex gap-3">
@@ -109,30 +110,32 @@ const Contact = () => {
               </span>
               <div>
                 <p className="text-sm font-semibold text-zinc-500">Address</p>
-                <p className="font-semibold text-[#111315]">
-                  Tokha-8, Kathmandu
-                </p>
+                <p className="font-semibold text-[#111315]">{address}</p>
               </div>
             </div>
           </div>
 
           <div className="mt-8 flex flex-wrap gap-3">
-            {contactLinks.map((link) => {
-              const Icon = link.icon;
-
-              return (
-                <a
-                  aria-label={link.label}
-                  className="grid h-11 w-11 place-items-center rounded-md border border-[#dfe2e8] text-zinc-600 transition hover:border-[#0d530e] hover:text-[#0d530e]"
-                  href={link.href}
-                  key={link.label}
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  <Icon size={19} />
-                </a>
-              );
-            })}
+            <a
+              aria-label="github"
+              className="grid h-11 w-11 place-items-center rounded-md border border-[#dfe2e8] text-zinc-600 transition hover:border-[#0d530e] hover:text-[#0d530e]"
+              href={github}
+              key="github"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <FaGithub size={19} />
+            </a>
+            <a
+              aria-label="linkedin"
+              className="grid h-11 w-11 place-items-center rounded-md border border-[#dfe2e8] text-zinc-600 transition hover:border-[#0d530e] hover:text-[#0d530e]"
+              href={linkedin}
+              key="linkedin"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <FaLinkedin size={19} />
+            </a>
             <a
               aria-label="Facebook"
               className="grid h-11 w-11 place-items-center rounded-md border border-[#dfe2e8] text-zinc-600 transition hover:border-[#0d530e] hover:text-[#0d530e]"
