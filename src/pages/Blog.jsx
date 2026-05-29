@@ -1,32 +1,54 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { CalendarDays, Clock3, Search } from "lucide-react";
 import { fallbackImage, getStoredPosts } from "../data/blogPosts";
-
+import { ref, onValue, getDatabase } from "firebase/database";
+import app from "../services/firebaseConfig";
 const Blog = () => {
-  const [posts] = useState(getStoredPosts);
+  const db = getDatabase(app);
+
+  const [blogs, setBlogs] = useState([]);
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("All");
 
+  useEffect(() => {
+    const blogRef = ref(db, "blogs");
+
+    onValue(blogRef, (snapshot) => {
+      const data = snapshot.val();
+
+      if (data) {
+        const formatted = Object.entries(data).map(([id, value]) => ({
+          id,
+          ...value,
+        }));
+
+        setBlogs(formatted);
+      } else {
+        setBlogs([]);
+      }
+    });
+  }, []);
+
   const categories = useMemo(
-    () => ["All", ...Array.from(new Set(posts.map((post) => post.category)))],
-    [posts],
+    () => ["All", ...Array.from(new Set(blogs.map((blog) => blog.category)))],
+    [blogs],
   );
 
-  const filteredPosts = useMemo(() => {
+  const filteredBlogs = useMemo(() => {
     const cleanQuery = query.trim().toLowerCase();
 
-    return posts.filter((post) => {
-      const matchesCategory = category === "All" || post.category === category;
+    return blogs.filter((blog) => {
+      const matchesCategory = category === "All" || blog.category === category;
       const matchesQuery =
         !cleanQuery ||
-        post.title.toLowerCase().includes(cleanQuery) ||
-        post.excerpt.toLowerCase().includes(cleanQuery) ||
-        post.category.toLowerCase().includes(cleanQuery);
+        blog.title.toLowerCase().includes(cleanQuery) ||
+        blog.excerpt.toLowerCase().includes(cleanQuery) ||
+        blog.category.toLowerCase().includes(cleanQuery);
 
       return matchesCategory && matchesQuery;
     });
-  }, [category, posts, query]);
+  }, [category, blogs, query]);
 
   return (
     <main className="min-h-screen bg-[#f7f8f4] text-left text-[#20222b]">
@@ -74,49 +96,49 @@ const Blog = () => {
         </div>
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {filteredPosts.map((post) => (
+          {filteredBlogs.map((blog) => (
             <article
               className="flex flex-col overflow-hidden rounded-lg border border-[#dfe2e8] bg-white transition hover:-translate-y-1  hover:shadow-[0_18px_40px_rgba(13,83,14,0.08)]"
-              key={post.id}
+              key={blog.id}
             >
-              <Link to={`/blog/${post.id}`}>
+              <Link to={`/blog/${blog.id}`}>
                 <img
-                  alt={post.title}
+                  alt={blog.title}
                   className="h-52 w-full object-cover"
-                  src={post.imageUrl || fallbackImage}
+                  src={blog.imageUrl || fallbackImage}
                 />
               </Link>
               <div className="flex flex-1 flex-col p-5">
                 <div className="mb-4 flex flex-wrap items-center gap-3 text-sm text-zinc-500">
                   <span className="rounded-full bg-[#0d530e]/10 px-3 py-1 font-semibold text-[#0d530e]">
-                    {post.category}
+                    {blog.category}
                   </span>
                   <span className="inline-flex items-center gap-1">
                     <Clock3 size={15} />
-                    {post.readTime}
+                    {blog.readTime}
                   </span>
                 </div>
                 <h2 className="text-xl font-bold leading-snug text-[#111315]">
                   <Link
                     className="transition hover:text-[#0d530e]"
-                    to={`/blog/${post.id}`}
+                    to={`/blog/${blog.id}`}
                   >
-                    {post.title}
+                    {blog.title}
                   </Link>
                 </h2>
                 <p className="mt-3 flex-1 text-sm leading-6 text-zinc-600">
-                  {post.excerpt}
+                  {blog.excerpt}
                 </p>
                 <div className="mt-5 flex items-center justify-between gap-4">
                   <span className="inline-flex items-center gap-1 text-sm font-medium text-zinc-500">
                     <CalendarDays size={15} />
-                    {post.date}
+                    {blog.date}
                   </span>
                   <Link
                     className="rounded-md border border-[#dfe2e8] px-3 py-2 text-sm font-semibold text-[#111315] transition hover:border-[#0d530e] hover:text-[#0d530e]"
-                    to={`/blog/${post.id}`}
+                    to={`/blog/${blog.id}`}
                   >
-                    Read post
+                    Read blog
                   </Link>
                 </div>
               </div>
@@ -124,10 +146,10 @@ const Blog = () => {
           ))}
         </div>
 
-        {!filteredPosts.length && (
+        {!filteredBlogs.length && (
           <div className="rounded-lg  p-10 text-center">
             <p className="text-lg font-semibold text-[#111315]">
-              No posts found
+              No blogs found
             </p>
             <p className="mt-2 text-sm text-zinc-500">
               Try another search or choose a different category.
