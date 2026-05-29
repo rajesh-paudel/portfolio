@@ -11,6 +11,9 @@ import { Toaster } from "react-hot-toast";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsOfService from "./pages/TermsOfService";
 import FAQPage from "./pages/FAQ";
+import AdminDashboard from "./pages/AdminDashboard";
+import AdminLogin from "./pages/AdminLogin";
+
 
 const ScrollToTop = ({ children }) => {
   const location = useLocation();
@@ -46,6 +49,8 @@ function App() {
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-of-service" element={<TermsOfService />} />
           <Route path="/faq" element={<FAQPage />} />
+          <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/admin" element={<AdminDashboard />} />
         </Routes>
         <Footer />
         <Toaster position="top-center" />
