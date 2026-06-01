@@ -26,7 +26,6 @@ export default function CreateBlogModal({
 
   if (!isOpen) return null;
 
-  // Helper to generate slug/id automatically from the title
   const generateSlug = (text) => {
     return text
       .toLowerCase()
@@ -34,7 +33,6 @@ export default function CreateBlogModal({
       .replace(/(^-|-$)+/g, "");
   };
 
-  // Helper to calculate reading time (~200 words per minute)
   const calculateReadTime = (text) => {
     const words = text.trim().split(/\s+/).filter(Boolean).length;
     const minutes = Math.max(1, Math.ceil(words / 200));

@@ -1,13 +1,14 @@
 import { useMemo, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { CalendarDays, Clock3, Search } from "lucide-react";
-import { fallbackImage, getStoredPosts } from "../data/blogPosts";
+
 import { ref, getDatabase, get } from "firebase/database";
 import app from "../services/firebaseConfig";
 const Blog = () => {
   const db = getDatabase(app);
 
   const [blogs, setBlogs] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("All");
 
@@ -32,6 +33,8 @@ const Blog = () => {
       } catch (error) {
         console.error("Error fetching blogs:", error);
         setBlogs([]);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -86,7 +89,14 @@ const Blog = () => {
             />
           </label>
           <div className="flex gap-2 overflow-x-auto pb-1 sm:pb-0">
-            {categories.map((categoryName) => (
+            {isLoading ? (
+              <>
+                <span className="h-10 w-20 shrink-0 animate-pulse rounded-md bg-zinc-200" />
+                <span className="h-10 w-24 shrink-0 animate-pulse rounded-md bg-zinc-200" />
+                <span className="h-10 w-20 shrink-0 animate-pulse rounded-md bg-zinc-200" />
+              </>
+            ) : (
+              categories.map((categoryName) => (
               <button
                 className={`whitespace-nowrap rounded-md border px-3 py-2 text-sm font-semibold transition ${
                   category === categoryName
@@ -99,12 +109,40 @@ const Blog = () => {
               >
                 {categoryName}
               </button>
-            ))}
+              ))
+            )}
           </div>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {filteredBlogs.map((blog) => (
+        {isLoading ? (
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {Array.from({ length: 6 }).map((_, index) => (
+              <article
+                className="overflow-hidden rounded-lg border border-[#dfe2e8] bg-white"
+                key={index}
+              >
+                <div className="h-52 w-full animate-pulse bg-zinc-200" />
+                <div className="space-y-4 p-5">
+                  <div className="flex items-center gap-3">
+                    <div className="h-7 w-24 animate-pulse rounded-full bg-zinc-200" />
+                    <div className="h-4 w-20 animate-pulse rounded bg-zinc-200" />
+                  </div>
+                  <div className="h-6 w-4/5 animate-pulse rounded bg-zinc-200" />
+                  <div className="space-y-2">
+                    <div className="h-4 w-full animate-pulse rounded bg-zinc-200" />
+                    <div className="h-4 w-5/6 animate-pulse rounded bg-zinc-200" />
+                  </div>
+                  <div className="flex items-center justify-between gap-4 pt-2">
+                    <div className="h-4 w-24 animate-pulse rounded bg-zinc-200" />
+                    <div className="h-9 w-24 animate-pulse rounded-md bg-zinc-200" />
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        ) : (
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {filteredBlogs.map((blog) => (
             <article
               className="flex flex-col overflow-hidden rounded-lg border border-[#dfe2e8] bg-white transition hover:-translate-y-1  hover:shadow-[0_18px_40px_rgba(13,83,14,0.08)]"
               key={blog.id}
@@ -113,7 +151,7 @@ const Blog = () => {
                 <img
                   alt={blog.title}
                   className="h-52 w-full object-cover"
-                  src={blog.imageUrl || fallbackImage}
+                  src={blog.imageUrl}
                 />
               </Link>
               <div className="flex flex-1 flex-col p-5">
@@ -151,10 +189,11 @@ const Blog = () => {
                 </div>
               </div>
             </article>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
 
-        {!filteredBlogs.length && (
+        {!isLoading && !filteredBlogs.length && (
           <div className="rounded-lg  p-10 text-center">
             <p className="text-lg font-semibold text-[#111315]">
               No blogs found

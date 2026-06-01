@@ -1,10 +1,9 @@
 import { Link, useParams } from "react-router-dom";
 import { ArrowLeft, CalendarDays, Clock3, UserRound } from "lucide-react";
-import { fallbackImage, getStoredPosts } from "../data/blogPosts";
+
 import { useState, useEffect } from "react";
 import {
   ref,
-  onValue,
   getDatabase,
   get,
   query,
@@ -16,9 +15,12 @@ const BlogDetail = () => {
   const db = getDatabase(app);
   const { slug } = useParams();
   const [blog, setBlog] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchBlog = async () => {
+      setIsLoading(true);
+
       try {
         const blogsRef = ref(db, "blogs");
 
@@ -37,11 +39,43 @@ const BlogDetail = () => {
       } catch (error) {
         console.error("Error fetching blog:", error);
         setBlog(null);
+      } finally {
+        setIsLoading(false);
       }
     };
 
     fetchBlog();
   }, [slug]);
+
+  if (isLoading) {
+    return (
+      <main className="min-h-screen bg-[#f7f8f4] text-left text-[#20222b]">
+        <article>
+          <header className="mx-auto max-w-4xl px-5 pb-8 pt-12 text-center sm:px-8 lg:pt-16">
+            <div className="mx-auto mb-8 h-5 w-28 animate-pulse rounded bg-zinc-200" />
+            <div className="mb-5 flex flex-wrap items-center justify-center gap-3">
+              <div className="h-7 w-24 animate-pulse rounded-full bg-zinc-200" />
+              <div className="h-5 w-24 animate-pulse rounded bg-zinc-200" />
+              <div className="h-5 w-28 animate-pulse rounded bg-zinc-200" />
+              <div className="h-5 w-20 animate-pulse rounded bg-zinc-200" />
+            </div>
+            <div className="mx-auto h-11 w-full max-w-3xl animate-pulse rounded bg-zinc-200 sm:h-14" />
+            <div className="mx-auto mt-4 h-5 w-5/6 max-w-2xl animate-pulse rounded bg-zinc-200" />
+          </header>
+
+          <div className="mx-auto max-w-6xl px-5 sm:px-8 lg:px-12">
+            <div className="h-[320px] w-full animate-pulse rounded-lg bg-zinc-200 sm:h-[460px]" />
+          </div>
+
+          <div className="mx-auto max-w-3xl space-y-3 px-5 py-10 sm:px-8">
+            <div className="h-5 w-full animate-pulse rounded bg-zinc-200" />
+            <div className="h-5 w-full animate-pulse rounded bg-zinc-200" />
+            <div className="h-5 w-4/5 animate-pulse rounded bg-zinc-200" />
+          </div>
+        </article>
+      </main>
+    );
+  }
 
   if (!blog) {
     return (
@@ -105,7 +139,7 @@ const BlogDetail = () => {
           <img
             alt={blog.title}
             className="h-[320px] w-full rounded-lg object-cover sm:h-[460px]"
-            src={blog.imageUrl || fallbackImage}
+            src={blog.imageUrl}
           />
         </div>
 

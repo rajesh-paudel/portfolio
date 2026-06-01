@@ -4,7 +4,7 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import Blog from "./pages/Blog";
 import BlogDetail from "./pages/BlogDetail";
-import BlogAdmin from "./pages/BlogAdmin";
+
 import Footer from "./components/Footer";
 import { useLayoutEffect } from "react";
 import { Toaster } from "react-hot-toast";
@@ -13,7 +13,6 @@ import TermsOfService from "./pages/TermsOfService";
 import FAQPage from "./pages/FAQ";
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminLogin from "./pages/AdminLogin";
-
 
 const ScrollToTop = ({ children }) => {
   const location = useLocation();
@@ -45,7 +44,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogDetail />} />
-          <Route path="/admin/blog" element={<BlogAdmin />} />
+
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-of-service" element={<TermsOfService />} />
           <Route path="/faq" element={<FAQPage />} />
