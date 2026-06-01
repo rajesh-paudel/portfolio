@@ -2,20 +2,45 @@ import { Link, useParams } from "react-router-dom";
 import { ArrowLeft, CalendarDays, Clock3, UserRound } from "lucide-react";
 import { fallbackImage, getStoredPosts } from "../data/blogPosts";
 import { useState, useEffect } from "react";
-import { ref, onValue, getDatabase } from "firebase/database";
+import {
+  ref,
+  onValue,
+  getDatabase,
+  get,
+  query,
+  orderByChild,
+  equalTo,
+} from "firebase/database";
 import app from "../services/firebaseConfig";
 const BlogDetail = () => {
   const db = getDatabase(app);
   const { slug } = useParams();
   const [blog, setBlog] = useState(null);
+
   useEffect(() => {
-    const blogRef = ref(db, `blogs/${slug}`);
+    const fetchBlog = async () => {
+      try {
+        const blogsRef = ref(db, "blogs");
 
-    onValue(blogRef, (snapshot) => {
-      const data = snapshot.val();
+        const q = query(blogsRef, orderByChild("slug"), equalTo(slug));
 
-      setBlog(data);
-    });
+        const snapshot = await get(q);
+
+        if (snapshot.exists()) {
+          const data = snapshot.val();
+
+          const firstKey = Object.keys(data)[0];
+          setBlog(data[firstKey]);
+        } else {
+          setBlog(null);
+        }
+      } catch (error) {
+        console.error("Error fetching blog:", error);
+        setBlog(null);
+      }
+    };
+
+    fetchBlog();
   }, [slug]);
 
   if (!blog) {

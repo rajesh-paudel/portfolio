@@ -45,7 +45,7 @@ export default function CreateBlogModal({
     e.preventDefault();
 
     const newPost = {
-      id: generateSlug(title) || `post-${Date.now()}`,
+      slug: generateSlug(title) || `post-${Date.now()}`,
       title,
       category,
       date: new Date().toISOString().split("T")[0],
@@ -64,12 +64,9 @@ export default function CreateBlogModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
-      {/* Click backdrop to close */}
       <div className="absolute inset-0" onClick={onClose} />
 
-      {/* Modal Card */}
       <div className="relative w-full max-w-2xl overflow-hidden bg-white rounded-2xl shadow-2xl border border-slate-100 flex flex-col max-h-[90vh]">
-        {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-slate-100 bg-slate-50/50">
           <div>
             <h3 className="text-xl font-bold text-slate-800 flex items-center gap-2">
@@ -88,12 +85,10 @@ export default function CreateBlogModal({
           </button>
         </div>
 
-        {/* Form Body */}
         <form
           onSubmit={handleSubmit}
           className="flex-1 overflow-y-auto p-6 space-y-5"
         >
-          {/* Title Input */}
           <div>
             <label className="block text-sm font-semibold text-slate-700 mb-1.5 flex items-center gap-1.5">
               <Type className="w-4 h-4 text-slate-400" /> Title
@@ -108,9 +103,7 @@ export default function CreateBlogModal({
             />
           </div>
 
-          {/* Grid for Category & Image URL */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            {/* Category */}
             <div className="sm:col-span-1">
               <label className="block text-sm font-semibold text-slate-700 mb-1.5 flex items-center gap-1.5">
                 <Folder className="w-4 h-4 text-slate-400" /> Category
@@ -128,7 +121,6 @@ export default function CreateBlogModal({
               </select>
             </div>
 
-            {/* Image URL */}
             <div className="sm:col-span-2">
               <label className="block text-sm font-semibold text-slate-700 mb-1.5 flex items-center gap-1.5">
                 <Image className="w-4 h-4 text-slate-400" /> Image URL
@@ -143,7 +135,6 @@ export default function CreateBlogModal({
             </div>
           </div>
 
-          {/* Excerpt */}
           <div>
             <label className="block text-sm font-semibold text-slate-700 mb-1.5 flex items-center gap-1.5">
               <FileText className="w-4 h-4 text-slate-400" /> Excerpt
@@ -158,7 +149,6 @@ export default function CreateBlogModal({
             />
           </div>
 
-          {/* Content TextArea */}
           <div className="flex-1 flex flex-col">
             <label className="block text-sm font-semibold text-slate-700 mb-1.5 flex items-center gap-1.5">
               <FileText className="w-4 h-4 text-slate-400" /> Main Content
@@ -173,7 +163,6 @@ export default function CreateBlogModal({
             />
           </div>
 
-          {/* Footer Control Panel */}
           <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-100 mt-2">
             <button
               type="button"

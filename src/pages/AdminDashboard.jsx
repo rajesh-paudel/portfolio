@@ -25,9 +25,6 @@ import {
   onValue,
 } from "firebase/database";
 
-const ADMIN_USERNAME = import.meta.env.VITE_ADMIN_USERNAME;
-const ADMIN_PASSWORD = import.meta.env.VITE_ADMIN_PASSWORD;
-
 export default function AdminDashboard() {
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -35,10 +32,8 @@ export default function AdminDashboard() {
   const [blogs, setBlogs] = useState([]);
   const [editingPost, setEditingPost] = useState(null);
 
-  // Initialize firebase  Realtime Database instance
   const db = getDatabase(app);
 
-  //  Admin Authentication Check
   useEffect(() => {
     const isAdmin = localStorage.getItem("isAdmin");
     if (!isAdmin) {
@@ -46,21 +41,18 @@ export default function AdminDashboard() {
     }
   }, [navigate]);
 
-  //  Real-time Firebase Database Synchronizer
   useEffect(() => {
     const blogsRef = ref(db, "blogs");
 
-    // Listens to Realtime node updates
     const unsubscribe = onValue(blogsRef, (snapshot) => {
       const data = snapshot.val();
+
       if (data) {
-        // Transform the object collections {[key]: data} into an array with keys as IDs
         const liveBlogs = Object.keys(data).map((key) => ({
           id: key,
           ...data[key],
         }));
 
-        // Sort by date descending locally since Realtime Database sorting options differ from Firestore
         liveBlogs.sort((a, b) => new Date(b.date) - new Date(a.date));
         setBlogs(liveBlogs);
       } else {
@@ -79,14 +71,13 @@ export default function AdminDashboard() {
   const handleCreateOrUpdate = async (postData) => {
     try {
       if (editingPost) {
-        // Firebase Realtime Update Path
         const postRef = ref(db, `blogs/${editingPost.id}`);
         await update(postRef, postData);
         toast.success("Blog updated successfully!");
       } else {
-        // Firebase Realtime Create Path
+        console.log(postData);
         const blogsRef = ref(db, "blogs");
-        const newPostRef = push(blogsRef); // Generates a unique key node id push
+        const newPostRef = push(blogsRef);
         await set(newPostRef, postData);
         toast.success("Blog created successfully!");
       }
@@ -103,21 +94,14 @@ export default function AdminDashboard() {
     setIsModalOpen(true);
   };
 
-  //  blog delete
   const handleDelete = async (id) => {
-    if (
-      window.confirm(
-        "Are you absolutely sure you want to delete this blog post?",
-      )
-    ) {
-      try {
-        const postRef = ref(db, `blogs/${id}`);
-        await remove(postRef);
-        toast.success("Blog deleted successfully!");
-      } catch (error) {
-        console.error("Error removing database reference item: ", error);
-        toast.error("Error deleting blog!");
-      }
+    try {
+      const postRef = ref(db, `blogs/${id}`);
+      await remove(postRef);
+      toast.success("Blog deleted successfully!");
+    } catch (error) {
+      console.error("Error removing database reference item: ", error);
+      toast.error("Error deleting blog!");
     }
   };
 
@@ -171,7 +155,6 @@ export default function AdminDashboard() {
           </div>
         </div>
 
-        {/* Tabular Operations Filter Bar */}
         <div className="flex items-center bg-white border border-slate-200/80 rounded-xl px-3.5 py-2 shadow-sm max-w-md focus-within:ring-2 focus-within:ring-indigo-500/20 focus-within:border-indigo-500 transition-all">
           <Search size={18} className="text-slate-400 mr-2.5 shrink-0" />
           <input
@@ -183,7 +166,6 @@ export default function AdminDashboard() {
           />
         </div>
 
-        {/* Dynamic Table Layout Canvas */}
         <div className="bg-white rounded-2xl border border-slate-200/70 shadow-sm overflow-hidden">
           {filteredBlogs.length > 0 ? (
             <div className="overflow-x-auto">
@@ -203,7 +185,6 @@ export default function AdminDashboard() {
                       key={blog.id}
                       className="hover:bg-slate-50/50 transition-colors"
                     >
-                      {/* Column 1: Image Frame */}
                       <td className="py-4 px-6 text-center">
                         <img
                           src={blog.imageUrl || blog.image}
@@ -212,7 +193,6 @@ export default function AdminDashboard() {
                         />
                       </td>
 
-                      {/* Column 2: Title & Author Group info */}
                       <td className="py-4 px-6 max-w-sm">
                         <div
                           className="font-semibold text-slate-800 truncate"
@@ -227,7 +207,6 @@ export default function AdminDashboard() {
                         </div>
                       </td>
 
-                      {/* Column 3: Category Badge */}
                       <td className="py-4 px-6 whitespace-nowrap">
                         <span className="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-medium bg-slate-100 text-slate-600 rounded-lg">
                           <Layers size={11} className="text-slate-400" />
@@ -235,7 +214,6 @@ export default function AdminDashboard() {
                         </span>
                       </td>
 
-                      {/* Column 4: Formatted Date */}
                       <td className="py-4 px-6 text-xs text-slate-500 whitespace-nowrap">
                         <div className="flex items-center gap-1.5">
                           <Calendar size={13} className="text-slate-400" />
@@ -243,7 +221,6 @@ export default function AdminDashboard() {
                         </div>
                       </td>
 
-                      {/* Column 5: Actions Controls */}
                       <td className="py-4 px-6 text-right whitespace-nowrap">
                         <div className="flex items-center justify-end gap-1">
                           <button

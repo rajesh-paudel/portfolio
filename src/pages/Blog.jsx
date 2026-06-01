@@ -2,7 +2,7 @@ import { useMemo, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { CalendarDays, Clock3, Search } from "lucide-react";
 import { fallbackImage, getStoredPosts } from "../data/blogPosts";
-import { ref, onValue, getDatabase } from "firebase/database";
+import { ref, getDatabase, get } from "firebase/database";
 import app from "../services/firebaseConfig";
 const Blog = () => {
   const db = getDatabase(app);
@@ -12,22 +12,30 @@ const Blog = () => {
   const [category, setCategory] = useState("All");
 
   useEffect(() => {
-    const blogRef = ref(db, "blogs");
+    const fetchBlogs = async () => {
+      try {
+        const blogRef = ref(db, "blogs");
+        const snapshot = await get(blogRef);
 
-    onValue(blogRef, (snapshot) => {
-      const data = snapshot.val();
+        if (snapshot.exists()) {
+          const data = snapshot.val();
 
-      if (data) {
-        const formatted = Object.entries(data).map(([id, value]) => ({
-          id,
-          ...value,
-        }));
+          const formatted = Object.entries(data).map(([id, value]) => ({
+            id,
+            ...value,
+          }));
 
-        setBlogs(formatted);
-      } else {
+          setBlogs(formatted);
+        } else {
+          setBlogs([]);
+        }
+      } catch (error) {
+        console.error("Error fetching blogs:", error);
         setBlogs([]);
       }
-    });
+    };
+
+    fetchBlogs();
   }, []);
 
   const categories = useMemo(
@@ -101,7 +109,7 @@ const Blog = () => {
               className="flex flex-col overflow-hidden rounded-lg border border-[#dfe2e8] bg-white transition hover:-translate-y-1  hover:shadow-[0_18px_40px_rgba(13,83,14,0.08)]"
               key={blog.id}
             >
-              <Link to={`/blog/${blog.id}`}>
+              <Link to={`/blog/${blog.slug}`}>
                 <img
                   alt={blog.title}
                   className="h-52 w-full object-cover"
@@ -121,7 +129,7 @@ const Blog = () => {
                 <h2 className="text-xl font-bold leading-snug text-[#111315]">
                   <Link
                     className="transition hover:text-[#0d530e]"
-                    to={`/blog/${blog.id}`}
+                    to={`/blog/${blog.slug}`}
                   >
                     {blog.title}
                   </Link>
@@ -136,7 +144,7 @@ const Blog = () => {
                   </span>
                   <Link
                     className="rounded-md border border-[#dfe2e8] px-3 py-2 text-sm font-semibold text-[#111315] transition hover:border-[#0d530e] hover:text-[#0d530e]"
-                    to={`/blog/${blog.id}`}
+                    to={`/blog/${blog.slug}`}
                   >
                     Read blog
                   </Link>
