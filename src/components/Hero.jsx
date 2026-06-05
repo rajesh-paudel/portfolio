@@ -1,6 +1,5 @@
 import { ArrowRight, FileUser } from "lucide-react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
 
 const Hero = () => {
   const name = {
