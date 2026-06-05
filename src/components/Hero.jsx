@@ -30,38 +30,32 @@ const Hero = () => {
     gap: "1rem",
   };
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 50 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 1, ease: "easeInOut", delay: 0 }}
-    >
-      <section className="hero-section">
-        <p style={name}>Hi I'm Rajesh Paudel</p>
-        <p>
-          <span style={{ ...design, display: "block", lineHeight: 1 }}>
-            I design & build
-          </span>
-          <span style={{ ...web, display: "block", lineHeight: 1 }}>
-            web applications
-          </span>
-        </p>
-        <p style={content}>
-          Full-stack developer specializing in React, Typescript and design
-          systems. I can create clean, performant and user-focused web
-          applications
-        </p>
-        <div style={buttons}>
-          <Link className="hero-button" to="/#projects">
-            View My Work <ArrowRight size={18} />
-          </Link>
+    <section className="hero-section">
+      <p style={name}>Hi I'm Rajesh Paudel</p>
+      <p>
+        <span style={{ ...design, display: "block", lineHeight: 1 }}>
+          I design & build
+        </span>
+        <span style={{ ...web, display: "block", lineHeight: 1 }}>
+          web applications
+        </span>
+      </p>
+      <p style={content}>
+        Full-stack developer specializing in React, Typescript and design
+        systems. I can create clean, performant and user-focused web
+        applications
+      </p>
+      <div style={buttons}>
+        <Link className="hero-button" to="/#projects">
+          View My Work <ArrowRight size={18} />
+        </Link>
 
-          <a className="cv-button" href="/rajesh-paudel-cv.pdf" download>
-            <FileUser size={16} />
-            <span>Download CV</span>
-          </a>
-        </div>
-      </section>
-    </motion.div>
+        <a className="cv-button" href="/rajesh-paudel-cv.pdf" download>
+          <FileUser size={16} />
+          <span>Download CV</span>
+        </a>
+      </div>
+    </section>
   );
 };
 
