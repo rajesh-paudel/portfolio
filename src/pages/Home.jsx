@@ -3,7 +3,7 @@ import TechStack from "../components/TechStack";
 import Education from "../components/Education";
 import Projects from "../components/Projects";
 import Contact from "../components/Contact";
-import ScrollReveal from "../services/animation";
+import ScrollReveal from "../components/Animation";
 const Home = () => {
   return (
     <main className="bg-white">
