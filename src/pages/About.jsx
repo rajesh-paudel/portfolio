@@ -3,6 +3,7 @@ import { FaLinkedin, FaGithub, FaFacebook, FaInstagram } from "react-icons/fa";
 import { FaG } from "react-icons/fa6";
 import about from "../assets/about.png";
 import ContactInfo from "../data/contactinfo";
+
 const About = () => {
   const { linkedin, facebook, instagram, github } = ContactInfo;
   return (

@@ -25,7 +25,6 @@ const BlogDetail = () => {
         const blogsRef = ref(db, "blogs");
 
         const q = query(blogsRef, orderByChild("slug"), equalTo(slug));
-
         const snapshot = await get(q);
 
         if (snapshot.exists()) {

@@ -97,18 +97,18 @@ const Blog = () => {
               </>
             ) : (
               categories.map((categoryName) => (
-              <button
-                className={`whitespace-nowrap rounded-md border px-3 py-2 text-sm font-semibold transition ${
-                  category === categoryName
-                    ? "border-[#0d530e] bg-[#0d530e] text-white"
-                    : "border-[#dfe2e8] bg-white text-zinc-600 hover:border-[#0d530e] hover:text-[#0d530e]"
-                }`}
-                key={categoryName}
-                onClick={() => setCategory(categoryName)}
-                type="button"
-              >
-                {categoryName}
-              </button>
+                <button
+                  className={`whitespace-nowrap rounded-md border px-3 py-2 text-sm font-semibold transition ${
+                    category === categoryName
+                      ? "border-[#0d530e] bg-[#0d530e] text-white"
+                      : "border-[#dfe2e8] bg-white text-zinc-600 hover:border-[#0d530e] hover:text-[#0d530e]"
+                  }`}
+                  key={categoryName}
+                  onClick={() => setCategory(categoryName)}
+                  type="button"
+                >
+                  {categoryName}
+                </button>
               ))
             )}
           </div>
@@ -133,7 +133,7 @@ const Blog = () => {
                     <div className="h-4 w-5/6 animate-pulse rounded bg-zinc-200" />
                   </div>
                   <div className="flex items-center justify-between gap-4 pt-2">
-                    <div className="h-4 w-24 animate-pulse rounded bg-zinc-200" />
+                    <div className="h-4 w-24 animate-puluuse rounded bg-zinc-200" />
                     <div className="h-9 w-24 animate-pulse rounded-md bg-zinc-200" />
                   </div>
                 </div>
@@ -143,52 +143,52 @@ const Blog = () => {
         ) : (
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {filteredBlogs.map((blog) => (
-            <article
-              className="flex flex-col overflow-hidden rounded-lg border border-[#dfe2e8] bg-white transition hover:-translate-y-1  hover:shadow-[0_18px_40px_rgba(13,83,14,0.08)]"
-              key={blog.id}
-            >
-              <Link to={`/blog/${blog.slug}`}>
-                <img
-                  alt={blog.title}
-                  className="h-52 w-full object-cover"
-                  src={blog.imageUrl}
-                />
-              </Link>
-              <div className="flex flex-1 flex-col p-5">
-                <div className="mb-4 flex flex-wrap items-center gap-3 text-sm text-zinc-500">
-                  <span className="rounded-full bg-[#0d530e]/10 px-3 py-1 font-semibold text-[#0d530e]">
-                    {blog.category}
-                  </span>
-                  <span className="inline-flex items-center gap-1">
-                    <Clock3 size={15} />
-                    {blog.readTime}
-                  </span>
+              <article
+                className="flex flex-col overflow-hidden rounded-lg border border-[#dfe2e8] bg-white transition hover:-translate-y-1  hover:shadow-[0_18px_40px_rgba(13,83,14,0.08)]"
+                key={blog.id}
+              >
+                <Link to={`/blog/${blog.slug}`}>
+                  <img
+                    alt={blog.title}
+                    className="h-52 w-full object-cover"
+                    src={blog.imageUrl}
+                  />
+                </Link>
+                <div className="flex flex-1 flex-col p-5">
+                  <div className="mb-4 flex flex-wrap items-center gap-3 text-sm text-zinc-500">
+                    <span className="rounded-full bg-[#0d530e]/10 px-3 py-1 font-semibold text-[#0d530e]">
+                      {blog.category}
+                    </span>
+                    <span className="inline-flex items-center gap-1">
+                      <Clock3 size={15} />
+                      {blog.readTime}
+                    </span>
+                  </div>
+                  <h2 className="text-xl font-bold leading-snug text-[#111315]">
+                    <Link
+                      className="transition hover:text-[#0d530e]"
+                      to={`/blog/${blog.slug}`}
+                    >
+                      {blog.title}
+                    </Link>
+                  </h2>
+                  <p className="mt-3 flex-1 text-sm leading-6 text-zinc-600">
+                    {blog.excerpt}
+                  </p>
+                  <div className="mt-5 flex items-center justify-between gap-4">
+                    <span className="inline-flex items-center gap-1 text-sm font-medium text-zinc-500">
+                      <CalendarDays size={15} />
+                      {blog.date}
+                    </span>
+                    <Link
+                      className="rounded-md border border-[#dfe2e8] px-3 py-2 text-sm font-semibold text-[#111315] transition hover:border-[#0d530e] hover:text-[#0d530e]"
+                      to={`/blog/${blog.slug}`}
+                    >
+                      Read blog
+                    </Link>
+                  </div>
                 </div>
-                <h2 className="text-xl font-bold leading-snug text-[#111315]">
-                  <Link
-                    className="transition hover:text-[#0d530e]"
-                    to={`/blog/${blog.slug}`}
-                  >
-                    {blog.title}
-                  </Link>
-                </h2>
-                <p className="mt-3 flex-1 text-sm leading-6 text-zinc-600">
-                  {blog.excerpt}
-                </p>
-                <div className="mt-5 flex items-center justify-between gap-4">
-                  <span className="inline-flex items-center gap-1 text-sm font-medium text-zinc-500">
-                    <CalendarDays size={15} />
-                    {blog.date}
-                  </span>
-                  <Link
-                    className="rounded-md border border-[#dfe2e8] px-3 py-2 text-sm font-semibold text-[#111315] transition hover:border-[#0d530e] hover:text-[#0d530e]"
-                    to={`/blog/${blog.slug}`}
-                  >
-                    Read blog
-                  </Link>
-                </div>
-              </div>
-            </article>
+              </article>
             ))}
           </div>
         )}
