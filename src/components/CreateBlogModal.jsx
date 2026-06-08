@@ -72,7 +72,7 @@ export default function CreateBlogModal({
             </h3>
             <p className="text-xs text-slate-500 mt-0.5">
               {initialData
-                ? "Update your blog in portfolio"
+                ? "Make changes to you existing blogs"
                 : "Publish a new piece to your tech portfolio"}
             </p>
           </div>
