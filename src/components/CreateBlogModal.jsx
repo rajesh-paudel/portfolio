@@ -17,7 +17,6 @@ export default function CreateBlogModal({
     if (isOpen) {
       setTitle(initialData ? initialData.title || "" : "");
       setCategory(initialData ? initialData.category || "React" : "React");
-
       setImageUrl(initialData ? initialData.imageUrl || "" : "");
       setExcerpt(initialData ? initialData.excerpt || "" : "");
       setContent(initialData ? initialData.content || "" : "");
@@ -69,10 +68,12 @@ export default function CreateBlogModal({
           <div>
             <h3 className="text-xl font-bold text-slate-800 flex items-center gap-2">
               <Sparkles className="w-5 h-5 text-[var(--accent)]" />
-              Create New Blog
+              {initialData ? "Update Blog" : "Create New Blog"}
             </h3>
             <p className="text-xs text-slate-500 mt-0.5">
-              Publish a new piece to your tech portfolio
+              {initialData
+                ? "Update your blog in portfolio"
+                : "Publish a new piece to your tech portfolio"}
             </p>
           </div>
           <button
